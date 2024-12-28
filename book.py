@@ -1,10 +1,15 @@
 from pprint import pprint
 
+
 class Book():
     def __init__(self):
         self.cook_book = {}
-        self.string_list = None
+        self.string_list = []
 
+    # Функция для чтения и записи(перезаписи) файла. Данные при чтении сохраняются в переменную string_list
+    # в виде списка строк, знаки преноса удаляются.
+    # Данные при записи(перезаписи) сохраняются в файл.
+    # Реализованы только три режима.
     def read_write(self, file: str, mode: str, context: str = None):
         with open(file, mode) as f:
           match mode:
@@ -23,12 +28,35 @@ class Book():
                     print(f'{file} остался без изменений. Передайте что-нибудь в переменную context')
             case _:   raise ValueError("Другие режимы пока не предусмотренны. Необходимо передать 'r', 'w', 'a' ")
 
-    def 
+    # Функция преобразования списка из переменной string_list в словарь со списками словарей.
+    def conv_to_dict(self):
+        start = 0
+        new_list = []
+
+        for index in range(len(self.string_list)):
+            stop = index
+            if self.string_list[index] == '':
+                new_list.append(self.string_list[start : stop])
+                start = stop + 1
+
+        for ingredients_list  in new_list:
+            dish = ingredients_list[0]
+            dish_ingredient = []
+
+            for ingredients in ingredients_list[2:]:
+                ingredient = ingredients.split('|')
+                dish_ingredient.append({'ingredient_name': ingredient[0], 'quantity': ingredient[1], 'measure': ingredient[2]})
+
+            self.cook_book[dish] = dish_ingredient
+
 
 
 
 
 book = Book()
-book.read_write("recipes.txt", "r", '12345')
+book.read_write("recipes.txt", "r", '')
 
-pprint(book.string_list)
+book.conv_to_dict()
+pprint(book.cook_book)
+
+
