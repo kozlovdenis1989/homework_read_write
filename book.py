@@ -1,6 +1,7 @@
 from pprint import pprint
 
 
+
 class Book():
     def __init__(self, file: str = None):
         self.file = file
@@ -148,7 +149,7 @@ def create_file(*args):
 
 
 file = Book()
-file.read_write("4.txt", "w", create_file(Book('1.txt'), Book('2.txt'), Book('3.txt')))
+file.read_write('text/4.txt', "w", create_file(Book('text/1.txt'), Book('text/2.txt'), Book('text/3.txt')))
 
 
 
